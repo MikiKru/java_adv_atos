@@ -1,9 +1,8 @@
 package lambda_stream_optional;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class ProjectController {
     // metoda wypisującą na konoli wszystkie projekty
@@ -41,6 +40,25 @@ public class ProjectController {
         // Stream<Project>
         // SortedStram<Projec>
         return InMemoryData.projects.stream().max(Comparator.comparing(Project::calculateFounds));                                                       // Optional<Project>
+    }
+    public OptionalDouble getMaxFounds(){
+        return InMemoryData.projects.stream()                       // Stream<Project>
+                .mapToDouble(Project::calculateFounds)              // Stream<Double>
+                .max();                                             // Optional<Double>
+    }
+    public OptionalDouble getAverageFounds(){
+        return InMemoryData.projects.stream().mapToDouble(Project::calculateFounds).average();
+    }
+    // zlicz ile jest projektów w danej kategorii
+    public long countProjectsByCategory(Category category){
+        return InMemoryData.projects.stream()
+                                .filter(project -> project.getCategories().contains(category))
+                                .count();
+    }
+    // zgrupuj obiekty klasy Project po kategoriach
+    public Map<Set<Category>,List<Project>> groupProjectByCategory(){
+        return InMemoryData.projects.stream()
+                    .collect(Collectors.groupingBy(Project::getCategories));
     }
 
 

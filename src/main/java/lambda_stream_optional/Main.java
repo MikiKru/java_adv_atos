@@ -19,5 +19,19 @@ public class Main {
 //                    currencyFormatter.format(project.calculateFounds())));
 //        pc.findMaxFinancedProject().ifPresent(project -> System.out.println(project));
         pc.findMaxFinancedProject().ifPresent(System.out::println);
+        pc.getMaxFounds().ifPresent(System.out::println);
+        pc.getAverageFounds().ifPresent(System.out::println);
+        System.out.println(pc.countProjectsByCategory(Category.IT));
+        System.out.println(pc.countProjectsByCategory(Category.GOTOWANIE));
+        System.out.println("===========================================");
+        pc.groupProjectByCategory()
+                .forEach((key, value) -> System.out.printf(
+                        "%50s | %d | %-30s\n",
+                        key,
+                        value.size(),
+                        value.stream()
+                                .map(project -> project.getAcronim() + " " + project.getCategories())
+                                .collect(Collectors.joining(", "))
+                ));
     }
 }
