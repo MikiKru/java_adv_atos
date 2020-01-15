@@ -2,6 +2,7 @@ package lambda_stream_optional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ProjectController {
@@ -30,4 +31,17 @@ public class ProjectController {
                     .collect(Collectors.toList());                                      // List<Project> sorted
         }
     }
+    // metoda zwracająca najdroższy projekt z max wartością dofinansowania
+    public Optional<Project> findMaxFinancedProject(){
+        return InMemoryData.projects.stream()                                       // Stream<Project>
+                .sorted(Comparator.comparing(Project::calculateFounds).reversed())  // SortedStram<Projec>
+                .findFirst();                                                       // Optional<Project>
+    }
+    public Optional<Project> findMaxFinancedProjectMax(){
+        // Stream<Project>
+        // SortedStram<Projec>
+        return InMemoryData.projects.stream().max(Comparator.comparing(Project::calculateFounds));                                                       // Optional<Project>
+    }
+
+
 }
