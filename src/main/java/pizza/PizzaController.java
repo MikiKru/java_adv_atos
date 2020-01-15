@@ -72,7 +72,10 @@ public class PizzaController {
                             pizza.getIngredients().stream()
                                     .map(ingredient -> ingredient.getName())
                                     .collect(Collectors.joining(", ")),
-                            getPizzaPrice(pizza))
+                            getPizzaPrice(pizza),
+                            pizza.getIngredients().stream().noneMatch(Ingredient::isMeat) ? "VEGE" : "",
+                            pizza.getIngredients().stream().anyMatch(Ingredient::isSpicy) ? "SPICY" : ""
+                            )
                     )
                     .collect(Collectors.joining("\n"));
     }
