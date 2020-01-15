@@ -16,5 +16,7 @@ public class Main {
                 "%15s %30s\n",
                 pizza,
                 pizza.getIngredients().stream().filter(Ingredient::isMeat).collect(Collectors.toList())));
+        System.out.println("=========================================");
+        pc.groupByPrice().forEach((key, value) -> System.out.printf("%20s | %s\n", key, value));
     }
 }
