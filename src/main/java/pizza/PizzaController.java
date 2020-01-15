@@ -62,7 +62,19 @@ public class PizzaController {
 
     }
 
-// String formatedMenu() - metoda zwracająca string w postaci nazwa_pizzy: składnik1, składnik2, składnik3 - cena, kolejne pizzę oddzielone znakiem nowej linii.
-
+// String formatedMenu() - metoda zwracająca string w postaci
+// nazwa_pizzy: składnik1, składnik2, składnik3 - cena, kolejne pizzę oddzielone znakiem nowej linii.
+    String formatedMenu(){
+        return Arrays.stream(Pizza.values())
+                    .map(pizza -> String.format(
+                            "| %15s | %-90s | %5d zł | %5s | %5s |",
+                            pizza.getName(),
+                            pizza.getIngredients().stream()
+                                    .map(ingredient -> ingredient.getName())
+                                    .collect(Collectors.joining(", ")),
+                            getPizzaPrice(pizza))
+                    )
+                    .collect(Collectors.joining("\n"));
+    }
 
 }
