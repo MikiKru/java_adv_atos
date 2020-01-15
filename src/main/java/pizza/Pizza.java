@@ -3,7 +3,8 @@ package pizza;
 import java.util.Arrays;
 import java.util.List;
 
-import static stream_repetition.Ingredient.*;
+import static pizza.Ingredient.*;
+
 
 public enum Pizza {
     MARGHERITA("Marrgherita", THIN_CRUST, TOMATO_SUACE, CHEESE),
