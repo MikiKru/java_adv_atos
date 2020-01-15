@@ -1,6 +1,7 @@
 package lambda_stream_optional;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -59,6 +60,11 @@ public class ProjectController {
     public Map<Set<Category>,List<Project>> groupProjectByCategory(){
         return InMemoryData.projects.stream()
                     .collect(Collectors.groupingBy(Project::getCategories));
+    }
+    // metoda sprawdzająca czy istnieje projekt o określonej nazwie
+    public boolean existsProjectByAcronim(String acronim){
+        return InMemoryData.projects.stream()
+                .anyMatch(project -> project.getAcronim().toUpperCase().contains(acronim.toUpperCase()));
     }
 
 

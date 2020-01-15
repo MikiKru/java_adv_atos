@@ -33,5 +33,7 @@ public class Main {
                                 .map(project -> project.getAcronim() + " " + project.getCategories())
                                 .collect(Collectors.joining(", "))
                 ));
+//        System.out.println(pc.existsProjectByAcronim("XXX"));
+        System.out.println(pc.existsProjectByAcronim("City"));
     }
 }
