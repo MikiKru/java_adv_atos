@@ -41,7 +41,17 @@ public class PizzaController {
                 .get();
     }
 // List iLikeMeat() - metoda zwracająca same pizzę mięsne, posortowane malejąco po liczbie składników mięsnych.
-
+    List<Pizza> iLikeMeat(){
+        return Arrays.stream(Pizza.values())
+                .filter(pizza -> pizza.getIngredients().stream()
+                        .anyMatch(Ingredient::isMeat)                   // filtrowanie po składnikach mięsnych
+                )
+                .sorted(Comparator.comparing(pizza -> pizza.getIngredients().stream()
+                        .filter(Ingredient::isMeat)                     // filtrowanie po składnikach mięsnych
+                        .count()                                        // zliczanie cześtotliwości wystepowania
+                ))
+                .collect(Collectors.toList());                          // zwrócenie List<Pizza>
+    }
 // Map groupByPrice() - metoda grupujące pizzę po cenie.
 
 // String formatedMenu() - metoda zwracająca string w postaci nazwa_pizzy: składnik1, składnik2, składnik3 - cena, kolejne pizzę oddzielone znakiem nowej linii.

@@ -1,5 +1,7 @@
 package pizza;
 
+import java.util.stream.Collectors;
+
 public class Main {
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
@@ -10,5 +12,9 @@ public class Main {
         pc.getAllVegetarian()
                 .forEach(pizza -> System.out.printf("%20s %10d \n", pizza, pc.getPizzaPrice(pizza)));
         System.out.println(pc.findMostExpensiveVegetarian());
+        pc.iLikeMeat().forEach(pizza -> System.out.printf(
+                "%15s %30s\n",
+                pizza,
+                pizza.getIngredients().stream().filter(Ingredient::isMeat).collect(Collectors.toList())));
     }
 }
