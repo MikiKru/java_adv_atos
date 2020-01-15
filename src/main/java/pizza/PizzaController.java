@@ -25,12 +25,21 @@ public class PizzaController {
                 ).min(Comparator.comparing(pizza -> getPizzaPrice(pizza))   // sortowanie po sumie cen składników
                 ).get();                                                    // pobranie wartości min
     }
-//    Pizza findCheapestSpicy(){
-//        return Arrays.stream(Pizza.values())
-//
-//    }
-// Pizza findMostExpensiveVegetarian() - metoda zwracająca najdroższą pizzę wegetariańską.
 
+    List<Pizza> getAllVegetarian(){
+        return Arrays.stream(Pizza.values()).filter(pizza ->
+                pizza.getIngredients().stream()
+                        .noneMatch(Ingredient::isMeat))
+                .collect(Collectors.toList());
+    }
+    // Pizza findMostExpensiveVegetarian() - metoda zwracająca najdroższą pizzę wegetariańską.
+    Pizza findMostExpensiveVegetarian(){
+        return Arrays.stream(Pizza.values())
+                .filter(pizza -> pizza.getIngredients().stream()
+                        .noneMatch(Ingredient::isMeat))
+                .max(Comparator.comparing(this::getPizzaPrice))
+                .get();
+    }
 // List iLikeMeat() - metoda zwracająca same pizzę mięsne, posortowane malejąco po liczbie składników mięsnych.
 
 // Map groupByPrice() - metoda grupujące pizzę po cenie.
