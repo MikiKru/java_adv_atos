@@ -22,6 +22,10 @@ public class Project {
     private LocalDate startDate;
     private int timeline;
 
+    public double calculateFounds(){
+        return budget * percentFounds / 100;
+    }
+
 //    public static void main(String[] args) {
 //        System.out.println(new Project("X", 2_000_000, 20, 85,
 //                new HashSet<>(Arrays.asList(Category.IT, Category.EDUCATION)),

@@ -1,5 +1,6 @@
 package lambda_stream_optional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,5 +18,16 @@ public class ProjectController {
         return InMemoryData.projects.stream()
                                         .filter(project -> project.getCategories().contains(category))
                                         .collect(Collectors.toList());
+    }
+    public List<Project> findProjectsOrderByFounds(boolean asc){
+        if(!asc) {
+            return InMemoryData.projects.stream()                                       // Stream<Project>
+                    .sorted(Comparator.comparing(Project::calculateFounds).reversed())  // SortedStream<Project>
+                    .collect(Collectors.toList());                                      // List<Project> sorted
+        }else {
+            return InMemoryData.projects.stream()                                       // Stream<Project>
+                    .sorted(Comparator.comparingDouble(Project::calculateFounds))  // SortedStream<Project>
+                    .collect(Collectors.toList());                                      // List<Project> sorted
+        }
     }
 }

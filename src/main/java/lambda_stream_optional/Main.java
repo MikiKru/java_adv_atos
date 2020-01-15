@@ -10,12 +10,12 @@ public class Main {
 //        pc.getAllProjects();
         Locale locale = new Locale("pl", "PL");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
-        pc.findProjectsByCategory(Category.IT)
-            .forEach(project -> System.out.printf("%25s %50s %20s \n",
+        pc.findProjectsOrderByFounds(true)
+            .forEach(project -> System.out.printf("%50s %50s %20s \n",
                     project.getAcronim(),
                     project.getCategories().stream()
                                     .map(Enum::name)
                                     .collect(Collectors.joining(", ")),
-                    currencyFormatter.format(project.getBudget())));
+                    currencyFormatter.format(project.calculateFounds())));
     }
 }
