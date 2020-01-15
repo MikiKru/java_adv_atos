@@ -65,16 +65,19 @@ public class PizzaController {
 // String formatedMenu() - metoda zwracająca string w postaci
 // nazwa_pizzy: składnik1, składnik2, składnik3 - cena, kolejne pizzę oddzielone znakiem nowej linii.
     String formatedMenu(){
+        Random random = new Random();
+        Pizza generatedPizza = Pizza.values()[random.nextInt(Pizza.values().length)];
         return Arrays.stream(Pizza.values())
                     .map(pizza -> String.format(
-                            "| %15s | %-90s | %5d zł | %5s | %5s |",
+                            "| %15s | %-90s | %5.2f zł | %5s | %5s | %s",
                             pizza.getName(),
                             pizza.getIngredients().stream()
                                     .map(ingredient -> ingredient.getName())
                                     .collect(Collectors.joining(", ")),
-                            getPizzaPrice(pizza),
+                            generatedPizza.equals(pizza) ? (getPizzaPrice(pizza)*0.7) : getPizzaPrice(pizza),
                             pizza.getIngredients().stream().noneMatch(Ingredient::isMeat) ? "VEGE" : "",
-                            pizza.getIngredients().stream().anyMatch(Ingredient::isSpicy) ? "SPICY" : ""
+                            pizza.getIngredients().stream().anyMatch(Ingredient::isSpicy) ? "SPICY" : "",
+                            generatedPizza.equals(pizza) ? "-" + (getPizzaPrice(pizza)*0.3) : ""
                             )
                     )
                     .collect(Collectors.joining("\n"));
