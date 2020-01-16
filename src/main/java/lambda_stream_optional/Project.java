@@ -3,6 +3,7 @@ package lambda_stream_optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import oop.UserRegistration;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -22,16 +23,16 @@ public class Project {
     private LocalDate startDate;
     private int timeline;
 
+
     public double calculateFounds(){
         return budget * percentFounds / 100;
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        System.out.println(new Project("X", 2_000_000, 20, 85,
 //                new HashSet<>(Arrays.asList(Category.IT, Category.EDUCATION)),
 //                LocalDate.of(2020, 1, 1), 36));
-//
-//    }
+    }
 
 
 

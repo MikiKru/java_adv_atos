@@ -15,6 +15,8 @@ public class User {
     private LocalDateTime registrationDate;
     private boolean status;
 
+
+
     private static Long auto_increment(){
         return ++globalId;
     }
