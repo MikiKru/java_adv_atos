@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileOperationImpl implements FileOperation {
-    File file;
-    BufferedWriter bw;
-    Scanner s;
+public class FileOperationImpl implements FileOperation, DatabaseConnector {
+    private File file;
+    private BufferedWriter bw;
+    private Scanner s;
     @Override
     public boolean createFile(String path) {
         file = new File(path);
@@ -31,8 +31,9 @@ public class FileOperationImpl implements FileOperation {
     public boolean setDataToFile(String data) {
         boolean flag = false;
         try {
-            bw = new BufferedWriter(new FileWriter(file));
-            bw.write(data); // zapis do bufora
+            FileWriter pw = new FileWriter(file, true);
+            bw = new BufferedWriter(pw);
+            bw.write(data + "\n"); // zapis do bufora
             bw.flush();     // zapis do pliku
             flag = true;
         } catch (IOException e) {
@@ -52,5 +53,35 @@ public class FileOperationImpl implements FileOperation {
             isClosed = false;
         }
         return isClosed;
+    }
+
+    @Override
+    public boolean setConnection(String host, int port, String username, String password, String dbName) {
+        return false;
+    }
+
+    @Override
+    public void save(Object o) {
+
+    }
+
+    @Override
+    public Object delete(Object o) {
+        return null;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        return false;
+    }
+
+    @Override
+    public List<Object> getAll() {
+        return null;
+    }
+
+    @Override
+    public Object getOne(Long id) {
+        return null;
     }
 }
