@@ -15,7 +15,16 @@ public class User {
     private LocalDateTime registrationDate;
     private boolean status;
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", status=" + status +
+                '}' + super.toString();
+    }
 
     private static Long auto_increment(){
         return ++globalId;

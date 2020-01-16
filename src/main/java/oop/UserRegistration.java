@@ -11,6 +11,7 @@ public class UserRegistration extends User {
         System.out.println("Konstruktor USER REGISTRATION");
         this.activationURL = "XXX";
     }
+    // przesłanianie
     @Override
     protected void getComment(){
         System.out.println("Przysłonięta metoda getComment");
@@ -27,6 +28,7 @@ public class UserRegistration extends User {
     public void toString(String s){
         System.out.println(s);
     }
+
     public static void main(String[] args) {
         UserRegistration userRegistration = new UserRegistration(
                 "x", "x");
@@ -37,6 +39,7 @@ public class UserRegistration extends User {
 //        System.out.println(ur.getClass().getName());
         Object o = new User("u1","u1");
         System.out.println(o.getClass().getName());
+        // przeciążanie
         userRegistration.toString("przeciążona wersja toString");
         System.out.println(userRegistration.toString());
     }
