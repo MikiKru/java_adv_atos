@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileOperationImpl implements FileOperation, DatabaseConnector {
+public class FileOperationImpl extends Proxy implements FileOperation, DatabaseConnector {
     private File file;
     private BufferedWriter bw;
     private Scanner s;
@@ -82,6 +82,11 @@ public class FileOperationImpl implements FileOperation, DatabaseConnector {
 
     @Override
     public Object getOne(Long id) {
+        return null;
+    }
+
+    @Override
+    public String getClassName() {
         return null;
     }
 }

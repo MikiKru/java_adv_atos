@@ -4,6 +4,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        FileOperationImpl foi = new FileOperationImpl();
+//        Proxy p = new Proxy(); -> nie można utworzyć instancji kalsy abstrakcyjnej
+        Proxy fileOperation = new FileOperationImpl();
+        System.out.println(fileOperation.getClass().getName());
+
         // klasa anonimowa
         DatabaseConnector databaseConnector = new DatabaseConnector() {
             @Override
