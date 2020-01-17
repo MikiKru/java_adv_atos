@@ -30,8 +30,8 @@ public class Author extends Thread {
                     text.setTextToWrite(textToPublish[i]);
                 } else if(timeTh.isAlive()) {
                     timeTh.start();
-                    timeTh.join();
-                    text.setTextToWrite(textToPublish[i]);
+                    timeTh.join();      // czekam aż miną 2 sekundy
+//                    text.setTextToWrite(textToPublish[i]);
                 } else {
                     System.out.println("Nic nie opublikowano");
                     timeTh.interrupt();
