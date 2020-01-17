@@ -19,7 +19,7 @@ public class Author extends Thread {
                             sleep(2000);
 
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
                     }
                 }) ;
@@ -34,9 +34,10 @@ public class Author extends Thread {
                     text.setTextToWrite(textToPublish[i]);
                 } else {
                     System.out.println("Nic nie opublikowano");
+                    timeTh.interrupt();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }
