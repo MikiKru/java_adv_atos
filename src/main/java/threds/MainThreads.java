@@ -1,6 +1,6 @@
 package threds;
 
-public class Main {
+public class MainThreads {
     public static void main(String[] args) throws InterruptedException {
         // utworzenie obiektu klasy rozszerzającej Thread
         ThreadsDemo th1 = new ThreadsDemo("Th-1");
