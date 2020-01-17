@@ -1,16 +1,21 @@
 package threds;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.lang.Thread.sleep;
 
 
 public class MainRunnableAnonymous {
-    private Deque<Integer> deque = new ArrayDeque<>();
+    private ConcurrentLinkedDeque<Integer> deque = new ConcurrentLinkedDeque<>();
     private boolean isProduced = false;
+    private boolean isConsumed = false;     // czy jest coś do pobrania
     private int global_i;
-    public void producer() {
-        Thread thProducer = new Thread(new Runnable() {
+    Thread thProducer;
+    Thread thConsumer;
+
+    public Thread producer() {
+        thProducer = new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 10; i++) {
@@ -18,38 +23,31 @@ public class MainRunnableAnonymous {
                     global_i++;
                     isProduced = true;
                     System.out.println("Dodano: " + i);
-                    try {
-                        sleep(new Random().nextInt(500));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
+                isProduced = false;
             }
         });
-        thProducer.start();
+        return thProducer;
     }
 
-    public void consumer() {
-        Thread thConsumer = new Thread(new Runnable() {
+    public Thread consumer() {
+        thConsumer = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (global_i < 10) {
-                    if(isProduced) {
+                    if (isProduced) {
                         System.out.println("Skonsumowano: " + deque.removeFirst());
-                        try {
-                            sleep(new Random().nextInt(500));
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }
         });
-        thConsumer.start();
+        return thConsumer;
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         MainRunnableAnonymous run = new MainRunnableAnonymous();
-        run.producer();
-        run.consumer();
+        run.consumer().start();
+        run.producer().start();
+
     }
 }
